@@ -13,9 +13,7 @@ class MainActivity : AppCompatActivity() {
             setContentView(root)
             buttonValidate.setOnClickListener {
                 if (!email.validate()) {
-                 val  inputLayout :TextInputLayout =  findViewById<TextInputLayout>(email.layoutId)
-                    inputLayout.error = "incorect email"
-//                    Toast.makeText(this@MainActivity, "Valid", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "Valid", Toast.LENGTH_SHORT).show()
                 }
             }
         }

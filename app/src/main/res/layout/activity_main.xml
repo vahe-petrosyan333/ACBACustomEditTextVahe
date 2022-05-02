@@ -17,7 +17,7 @@
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layoutId = "@+id/input_layout"
+            app:layoutId="@+id/input_layout"
             app:types="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
