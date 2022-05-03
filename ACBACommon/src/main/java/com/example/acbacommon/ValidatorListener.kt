@@ -1,5 +1,5 @@
 package com.example.acbacommon
 
 interface ValidatorListener {
-    fun validate(): Boolean
+    fun validate()
 }

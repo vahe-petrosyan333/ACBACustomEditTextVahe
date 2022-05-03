@@ -9,9 +9,14 @@ import com.google.android.material.textfield.TextInputLayout
 
 
 class ACBAEditText : AppCompatEditText, ValidatorListener {
+
+    val EMAIL_ERROR = "Incorrect email"
+    val PASSWORD_ERROR = "Incorrect password"
+
     private var mType: Int = 0
     var layoutId: Int = 0
     var textInputLayout: TextInputLayout? = null
+
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet) {
@@ -30,25 +35,34 @@ class ACBAEditText : AppCompatEditText, ValidatorListener {
         val incoming = context.obtainStyledAttributes(attributeSet, R.styleable.ACBAEditText)
         mType = incoming.getInteger(R.styleable.ACBAEditText_types, 0)
         layoutId = incoming.getResourceId(R.styleable.ACBAEditText_layoutId, 0)
-        textInputLayout =
-            ((this.parent as? TextInputLayout)?.parent as? View)?.findViewById(layoutId)
+
         incoming.recycle()
     }
 
-    override fun validate(): Boolean {
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        textInputLayout = (parent.parent as View).findViewById(layoutId)
+    }
 
-        return when (mType) {
+    override fun validate() {
+
+        when (mType) {
             1 -> {
-                Validator.isValidEmail(text.toString())
+                if (!Validator.isValidEmail(text.toString())) {
+                    showErrorWhenIsNotValid(EMAIL_ERROR)
+                }
             }
             2 -> {
-                Validator.isValidPassword(text.toString())
+                if (!Validator.isValidPassword(text.toString())) {
+                    showErrorWhenIsNotValid(PASSWORD_ERROR)
+                }
+
             }
-            else -> false
+
         }
     }
 
-    fun setErrorWhenIsNotValid() {
-    textInputLayout?.error = "Incorrect email"
+    fun showErrorWhenIsNotValid(errorMessage: String) {
+        textInputLayout?.error = errorMessage
     }
 }

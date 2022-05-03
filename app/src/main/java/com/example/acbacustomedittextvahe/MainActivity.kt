@@ -2,7 +2,11 @@ package com.example.acbacustomedittextvahe
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.children
+import com.example.acbacommon.ValidatorListener
 import com.example.acbacustomedittextvahe.databinding.ActivityMainBinding
 import com.google.android.material.textfield.TextInputLayout
 
@@ -12,10 +16,19 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater).apply {
             setContentView(root)
             buttonValidate.setOnClickListener {
-                if (!email.validate()) {
-                    Toast.makeText(this@MainActivity, "Valid", Toast.LENGTH_SHORT).show()
-                }
+                isValid(root)
             }
+        }
+
+    }
+
+    fun isValid(root: View) {
+        if (root is ViewGroup) {
+            for (view in root.children) {
+                isValid(view)
+            }
+        } else if (root is ValidatorListener) {
+            root.validate()
         }
 
     }
