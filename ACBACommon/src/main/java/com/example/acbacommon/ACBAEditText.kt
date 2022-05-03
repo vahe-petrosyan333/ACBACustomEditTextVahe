@@ -2,7 +2,6 @@ package com.example.acbacommon
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.TypedValue
 import android.view.View
 import androidx.appcompat.widget.AppCompatEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -16,7 +15,6 @@ class ACBAEditText : AppCompatEditText, ValidatorListener {
     private var mType: Int = 0
     var layoutId: Int = 0
     var textInputLayout: TextInputLayout? = null
-
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet) {
