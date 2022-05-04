@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ACBAEditText">
+        <attr name="types" format="integer" />
+        <attr name="error" format="string" />
+        <attr name="layoutId" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ACBAETextInput"></declare-styleable>
+
+    <declare-styleable name="ACBAButton">
+        <attr name="isBlockDoubleClick" format="boolean" />
+        <attr name="clickInterval" format="integer" />
+    </declare-styleable>
+</resources>

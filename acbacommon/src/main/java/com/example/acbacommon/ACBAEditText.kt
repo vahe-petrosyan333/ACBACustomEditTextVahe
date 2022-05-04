@@ -9,12 +9,15 @@ import com.google.android.material.textfield.TextInputLayout
 
 class ACBAEditText : AppCompatEditText, ValidatorListener {
 
-    val EMAIL_ERROR = "Incorrect email"
-    val PASSWORD_ERROR = "Incorrect password"
+    val EMAIL_ERROR by lazy { "Incorrect email" }
+    val PASSWORD_ERROR by lazy { "Incorrect password" }
+
+    lateinit var validator: Validator
 
     private var mType: Int = 0
     var layoutId: Int = 0
     var textInputLayout: TextInputLayout? = null
+    var errorMessage: String? = ""
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet) {
@@ -30,10 +33,11 @@ class ACBAEditText : AppCompatEditText, ValidatorListener {
     }
 
     private fun init(context: Context, attributeSet: AttributeSet) {
+        validator = Validator()
         val incoming = context.obtainStyledAttributes(attributeSet, R.styleable.ACBAEditText)
         mType = incoming.getInteger(R.styleable.ACBAEditText_types, 0)
         layoutId = incoming.getResourceId(R.styleable.ACBAEditText_layoutId, 0)
-
+        errorMessage = incoming.getString(R.styleable.ACBAEditText_error)
         incoming.recycle()
     }
 
@@ -46,14 +50,14 @@ class ACBAEditText : AppCompatEditText, ValidatorListener {
 
         when (mType) {
             1 -> {
-                if (!Validator.isValidEmail(text.toString())) {
-                    showErrorWhenIsNotValid(EMAIL_ERROR)
-                }
+                if (!validator.isValidEmail(text.toString())) {
+                    showErrorWhenIsNotValid(errorMessage ?: EMAIL_ERROR)
+                } else textInputLayout?.error = null
             }
             2 -> {
-                if (!Validator.isValidPassword(text.toString())) {
-                    showErrorWhenIsNotValid(PASSWORD_ERROR)
-                }
+                if (!validator.isValidPassword(text.toString())) {
+                    showErrorWhenIsNotValid(errorMessage ?: PASSWORD_ERROR)
+                } else textInputLayout?.error = null
 
             }
 

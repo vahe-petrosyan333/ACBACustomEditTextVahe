@@ -2,7 +2,7 @@ package com.example.acbacommon
 
 import java.util.regex.Pattern
 
-object Validator {
+class Validator {
 
     private val validEmailAddressRegex =
         Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE)
