@@ -10,7 +10,7 @@ class ACBAButton : androidx.appcompat.widget.AppCompatButton {
 
     var isBlockDoubleClick = false
     var isClicked = false
-    var clickInterval = 0
+    private var clickInterval = 0
 
     constructor(context: Context) : super(context)
 
