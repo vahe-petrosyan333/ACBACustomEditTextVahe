@@ -1,6 +1,6 @@
-package com.acba.common.view.retrofitservice
+package com.acba.acbadigital.retrofitservice
 
-import com.acba.common.view.urls.BASE_URL
+import com.acba.acbadigital.urls.BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -25,7 +25,7 @@ object RetrofitInstance {
         ).addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    fun getYelpServices(): RequestService {
+    fun getRequestService(): RequestService {
         return retrofit.create(RequestService::class.java)
     }
 }
