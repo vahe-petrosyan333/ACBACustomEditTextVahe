@@ -25,19 +25,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d("DOUBLE_CLICK", "click")
             }
         }
-        CoroutineScope(Dispatchers.IO).launch {
-            val result: ApiResponse<Rates> = MainRepository.search()
-            result.data?.let {
-                Log.i("RequestTag", it.toString())
-            } ?: run {
-                result.exception?.let {
-                    withContext(Dispatchers.Main) {
-                        it.printStackTrace()
-                        Log.i("RequestTag", it.localizedMessage?:"")
-                    }
-                }
-            }
-        }
+       getRateData()
     }
 
     fun isValid(root: View) {
@@ -50,5 +38,19 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
+private fun getRateData(){
+    CoroutineScope(Dispatchers.IO).launch {
+        val result: ApiResponse<Rates> = MainRepository.search()
+        result.data?.let {
+            Log.i("RequestTag", it.toString())
+        } ?: run {
+            result.exception?.let {
+                withContext(Dispatchers.Main) {
+                    it.printStackTrace()
+                    Log.i("RequestTag", it.localizedMessage?:"")
+                }
+            }
+        }
+    }
+}
 }

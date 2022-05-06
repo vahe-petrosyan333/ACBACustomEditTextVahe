@@ -6,7 +6,5 @@ sealed class ApiResponse<T>(
 ) {
     data class Success<T>(val mData: T) : ApiResponse<T>(mData, null)
 
-    data class Error<T>(
-        val mException: Exception
-    ) : ApiResponse<T>(null, mException)
+    data class Error<T>(val mException: Exception) : ApiResponse<T>(null, mException)
 }
