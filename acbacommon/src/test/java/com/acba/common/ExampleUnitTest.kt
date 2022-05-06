@@ -1,4 +1,4 @@
-package com.example.acbacommon
+package com.acba.common
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

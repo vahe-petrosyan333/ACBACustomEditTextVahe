@@ -1,4 +1,4 @@
-package com.example.acbacommon
+package com.acba.common.view.validatoredittext
 
 import java.util.regex.Pattern
 
@@ -9,7 +9,7 @@ class Validator {
 
     private val validPasswordRegex =
         Pattern.compile(
-            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–{}]:;',?/*~\$^+=<>]).{8,20}\$",
+            ".{8,20}",
             Pattern.CASE_INSENSITIVE
         )
 

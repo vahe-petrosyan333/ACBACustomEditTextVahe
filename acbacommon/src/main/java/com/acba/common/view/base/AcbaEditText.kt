@@ -1,13 +1,16 @@
-package com.example.acbacommon
+package com.acba.common.view.base
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import androidx.appcompat.widget.AppCompatEditText
+import com.acba.common.R
+import com.acba.common.view.validatoredittext.Validator
+import com.acba.common.view.validatoredittext.ValidatorListener
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 
-class ACBAEditText : AppCompatEditText, ValidatorListener {
+class AcbaEditText : TextInputEditText, ValidatorListener {
 
     val EMAIL_ERROR by lazy { "Incorrect email" }
     val PASSWORD_ERROR by lazy { "Incorrect password" }
@@ -19,7 +22,10 @@ class ACBAEditText : AppCompatEditText, ValidatorListener {
     var textInputLayout: TextInputLayout? = null
     var errorMessage: String? = ""
 
-    constructor(context: Context) : super(context)
+    constructor(context: Context) : super(context) {
+        init(context)
+    }
+
     constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet) {
         init(context, attributeSet)
     }
@@ -32,13 +38,13 @@ class ACBAEditText : AppCompatEditText, ValidatorListener {
         init(context, attributeSet)
     }
 
-    private fun init(context: Context, attributeSet: AttributeSet) {
+    private fun init(context: Context, attributeSet: AttributeSet? = null) {
         validator = Validator()
-        val incoming = context.obtainStyledAttributes(attributeSet, R.styleable.ACBAEditText)
-        mType = incoming.getInteger(R.styleable.ACBAEditText_types, 0)
-        layoutId = incoming.getResourceId(R.styleable.ACBAEditText_layoutId, 0)
-        errorMessage = incoming.getString(R.styleable.ACBAEditText_error)
-        incoming.recycle()
+        val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.ACBAEditText)
+        mType = typedArray.getInteger(R.styleable.ACBAEditText_types, 0)
+        layoutId = typedArray.getResourceId(R.styleable.ACBAEditText_layoutId, 0)
+        errorMessage = typedArray.getString(R.styleable.ACBAEditText_error)
+        typedArray.recycle()
     }
 
     override fun onAttachedToWindow() {

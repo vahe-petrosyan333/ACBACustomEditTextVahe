@@ -1,10 +1,11 @@
-package com.example.acbacommon
+package com.acba.common.view.base
 
 import android.content.Context
 import android.util.AttributeSet
+import com.acba.common.R
 import com.google.android.material.textfield.TextInputLayout
 
-class ACBATextInputLayout : TextInputLayout {
+class AcbaTextInputLayout : TextInputLayout {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet) {
@@ -17,7 +18,7 @@ class ACBATextInputLayout : TextInputLayout {
     }
 
     private fun init(context: Context, attributeSet: AttributeSet) {
-        val incomingValues = context.obtainStyledAttributes(
+        val typedArray = context.obtainStyledAttributes(
             attributeSet,
             R.styleable.ACBAETextInput
         )

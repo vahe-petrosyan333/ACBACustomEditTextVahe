@@ -1,4 +1,4 @@
-package com.example.acbacustomedittextvahe
+package com.acba.acbadigital
 
 import android.os.Bundle
 import android.util.Log
@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
-import com.example.acbacommon.ValidatorListener
-import com.example.acbacustomedittextvahe.databinding.ActivityMainBinding
-import com.google.android.material.textfield.TextInputLayout
+import com.acba.acbadigital.databinding.ActivityMainBinding
+import com.acba.common.view.validatoredittext.ValidatorListener
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
