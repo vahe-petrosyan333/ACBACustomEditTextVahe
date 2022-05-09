@@ -6,16 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
+import androidx.lifecycle.MutableLiveData
 import com.acba.acbadigital.databinding.ActivityMainBinding
-import com.acba.acbadigital.models.Rates
-import com.acba.acbadigital.repositories.MainRepository
+import com.acba.acbadigital.net.RetrofitInstance
+import com.acba.acbadigital.repositories.MainSharedRepositoryImpl
+import com.acba.acbadigital.ui.MainViewModel
 import com.acba.common.view.validatoredittext.ValidatorListener
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
+    private var mLoading: View? = null
+    private val viewModel: MainViewModel =
+        MainViewModel(MainSharedRepositoryImpl(RetrofitInstance.getRequestService()))
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ActivityMainBinding.inflate(layoutInflater).apply {
@@ -25,7 +27,19 @@ class MainActivity : AppCompatActivity() {
                 Log.d("DOUBLE_CLICK", "click")
             }
         }
-       getRateData()
+        mLoading = findViewById(R.id.loading_layout)
+        viewModel.getRates(true)
+        viewModel.ratesLiveData.observe(this) {
+            print(it)
+        }
+
+        loaderLiveData.observe(this) {
+            if (it) {
+                mLoading?.visibility = View.VISIBLE
+            } else {
+                mLoading?.visibility = View.GONE
+            }
+        }
     }
 
     fun isValid(root: View) {
@@ -36,21 +50,9 @@ class MainActivity : AppCompatActivity() {
         } else if (root is ValidatorListener) {
             root.validate()
         }
+    }
 
+    companion object {
+        val loaderLiveData: MutableLiveData<Boolean> = MutableLiveData()
     }
-private fun getRateData(){
-    CoroutineScope(Dispatchers.IO).launch {
-        val result: ApiResponse<Rates> = MainRepository.search()
-        result.data?.let {
-            Log.i("RequestTag", it.toString())
-        } ?: run {
-            result.exception?.let {
-                withContext(Dispatchers.Main) {
-                    it.printStackTrace()
-                    Log.i("RequestTag", it.localizedMessage?:"")
-                }
-            }
-        }
-    }
-}
 }

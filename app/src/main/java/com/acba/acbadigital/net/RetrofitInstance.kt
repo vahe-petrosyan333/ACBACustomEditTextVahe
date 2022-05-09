@@ -1,4 +1,4 @@
-package com.acba.acbadigital.retrofitservice
+package com.acba.acbadigital.net
 
 import com.acba.acbadigital.urls.BASE_URL
 import okhttp3.OkHttpClient
@@ -25,7 +25,7 @@ object RetrofitInstance {
         ).addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    fun getRequestService(): RequestService {
-        return retrofit.create(RequestService::class.java)
+    fun getRequestService(): DataSource {
+        return retrofit.create(DataSource::class.java)
     }
 }

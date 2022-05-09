@@ -54,4 +54,8 @@
         app:layout_constraintTop_toBottomOf="@id/password_input_layout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <include
+        android:id="@+id/loading_layout"
+        layout="@layout/loading_layout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
