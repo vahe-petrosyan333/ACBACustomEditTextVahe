@@ -18,11 +18,12 @@
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:error="incorrect email"
-            android:inputType="text"
             android:imeOptions="actionDone"
+            android:inputType="text"
+            app:errorMessage="regex"
             app:layoutId="@+id/email_input_layout"
-            app:types="1" />
+            app:regex="@string/reg"
+            app:validator="regex" />
     </com.acba.common.view.base.AcbaTextInputLayout>
 
     <com.acba.common.view.base.AcbaTextInputLayout
@@ -36,11 +37,11 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:error="wrong password"
-            android:inputType="text"
             android:imeOptions="actionDone"
+            android:inputType="text"
+            app:errorMessage="wrong password"
             app:layoutId="@+id/password_input_layout"
-            app:types="2" />
+            app:validator="password" />
     </com.acba.common.view.base.AcbaTextInputLayout>
 
 
@@ -48,10 +49,10 @@
         android:id="@+id/button_validate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Validate"
         android:layout_marginTop="20dp"
+        android:text="Validate"
         app:isPreventDoubleClick="true"
-        app:layout_constraintTop_toBottomOf="@id/password_input_layout"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_input_layout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

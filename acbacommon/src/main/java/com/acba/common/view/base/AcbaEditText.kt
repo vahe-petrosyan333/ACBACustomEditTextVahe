@@ -17,10 +17,12 @@ class AcbaEditText : TextInputEditText, ValidatorListener {
 
     lateinit var validator: Validator
 
-    private var mType: Int = 0
-    var layoutId: Int = 0
-    var textInputLayout: TextInputLayout? = null
-    var errorMessage: String? = ""
+    private var layoutId: Int = 0
+    private var textInputLayout: TextInputLayout? = null
+    private var errorMessage: String? = ""
+    private var regex: String? = ""
+    private var validatorType: Int = 0
+
 
     constructor(context: Context) : super(context) {
         init(context)
@@ -31,9 +33,9 @@ class AcbaEditText : TextInputEditText, ValidatorListener {
     }
 
     constructor(context: Context, attributeSet: AttributeSet, defStyledAttr: Int) : super(
-        context,
-        attributeSet,
-        defStyledAttr
+            context,
+            attributeSet,
+            defStyledAttr
     ) {
         init(context, attributeSet)
     }
@@ -41,10 +43,16 @@ class AcbaEditText : TextInputEditText, ValidatorListener {
     private fun init(context: Context, attributeSet: AttributeSet? = null) {
         validator = Validator()
         val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.ACBAEditText)
-        mType = typedArray.getInteger(R.styleable.ACBAEditText_types, 0)
-        layoutId = typedArray.getResourceId(R.styleable.ACBAEditText_layoutId, 0)
-        errorMessage = typedArray.getString(R.styleable.ACBAEditText_error)
-        typedArray.recycle()
+        try {
+            layoutId = typedArray.getResourceId(R.styleable.ACBAEditText_layoutId, 0)
+            errorMessage = typedArray.getString(R.styleable.ACBAEditText_errorMessage)
+            regex = typedArray.getString(R.styleable.ACBAEditText_regex)
+            validatorType = typedArray.getInt(R.styleable.ACBAEditText_validator, 0)
+        } finally {
+            typedArray.recycle()
+        }
+
+
     }
 
     override fun onAttachedToWindow() {
@@ -54,7 +62,7 @@ class AcbaEditText : TextInputEditText, ValidatorListener {
 
     override fun validate() {
 
-        when (mType) {
+        when (validatorType) {
             1 -> {
                 if (!validator.isValidEmail(text.toString())) {
                     showErrorWhenIsNotValid(errorMessage ?: EMAIL_ERROR)
@@ -65,6 +73,11 @@ class AcbaEditText : TextInputEditText, ValidatorListener {
                     showErrorWhenIsNotValid(errorMessage ?: PASSWORD_ERROR)
                 } else textInputLayout?.error = null
 
+            }
+            3 -> {
+                if (!validator.validateFromRegex(regex, text.toString())) {
+                    showErrorWhenIsNotValid(errorMessage ?: "")
+                }
             }
 
         }

@@ -1,3 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">ACBA digital</string>
+    <string name="reg" tools:ignore="ExtraTranslation">"^[A–Z0–9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}$"</string>
 </resources>

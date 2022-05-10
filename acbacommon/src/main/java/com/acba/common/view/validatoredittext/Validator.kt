@@ -8,10 +8,9 @@ class Validator {
         Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE)
 
     private val validPasswordRegex =
-        Pattern.compile(
-            ".{8,20}",
-            Pattern.CASE_INSENSITIVE
-        )
+            Pattern.compile(
+                    ".{8,20}",
+                    Pattern.CASE_INSENSITIVE)
 
     fun isValidEmail(text: String): Boolean {
         return validEmailAddressRegex.matcher(text).find()
@@ -19,5 +18,9 @@ class Validator {
 
     fun isValidPassword(text: String): Boolean {
         return validPasswordRegex.matcher(text).find()
+    }
+
+    fun validateFromRegex(regex: String?, text: String): Boolean {
+        return Pattern.compile(regex ?: "", Pattern.CASE_INSENSITIVE).matcher(text).find()
     }
 }
