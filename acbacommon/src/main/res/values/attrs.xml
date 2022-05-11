@@ -5,6 +5,7 @@
     <declare-styleable name="AcbaEditText">
         <attr name="errorMessage" format="string" />
         <attr name="layoutId" format="reference" />
+        <attr name="isRequired" format="boolean" />
         <attr name="minLength" format="integer" />
         <attr name="regex" format="string" />
         <attr name="validator" format="enum">

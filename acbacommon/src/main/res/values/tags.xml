@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="validate_required_field" type="integer">0</item>
+    <item name="validate_email" type="integer">1</item>
+    <item name="validate_password" type="integer">2</item>
+    <item name="validate_regex" type="integer">3</item>
+</resources>
