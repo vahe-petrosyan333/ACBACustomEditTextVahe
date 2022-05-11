@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         mLoading = findViewById(R.id.loading_layout)
         viewModel.getRates(true)
         viewModel.ratesLiveData.observe(this) {
-            print(it)
+            Log.i("Rates_response", it.toString())
         }
 
         loaderLiveData.observe(this) {

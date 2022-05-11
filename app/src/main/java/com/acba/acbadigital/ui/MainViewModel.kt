@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.acba.acbadigital.models.Rates
+import com.acba.acbadigital.models.RatesResponseModel
 import com.acba.acbadigital.net.ApiResultCallBack
 import com.acba.acbadigital.repositories.MainSharedRepository
 import kotlinx.coroutines.launch
@@ -17,9 +18,10 @@ class MainViewModel(private val mainSharedRepository: MainSharedRepository) : Vi
 
     fun getRates(showLoader: Boolean) {
         viewModelScope.launch {
-            mainSharedRepository.getRates(apiResultCallBack = object : ApiResultCallBack<Rates?> {
-                override fun onSuccess(data: Rates?) {
-                    _ratesLiveData.value = data?.result
+            mainSharedRepository.getRates(apiResultCallBack = object :
+                ApiResultCallBack<RatesResponseModel?> {
+                override fun onSuccess(data: RatesResponseModel?) {
+                    _ratesLiveData.value = data?.rates
                 }
             }, showLoader)
         }

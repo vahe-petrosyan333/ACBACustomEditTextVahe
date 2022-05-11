@@ -1,7 +1,5 @@
 package com.acba.acbadigital.models
 
-import com.acba.acbadigital.response.BaseResponseModel
-
 data class RatesResponseModel(
     val rates: Rates?
 )
@@ -13,7 +11,7 @@ data class Rates(
     val currencies: List<Currency>?,
     val last_update_date: String?,
     val non_cash: List<Card>?
-) : BaseResponseModel<Rates>()
+)
 
 
 data class Card(

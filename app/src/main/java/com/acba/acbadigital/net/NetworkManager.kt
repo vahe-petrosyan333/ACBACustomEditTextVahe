@@ -4,16 +4,15 @@ import android.content.Context
 import android.net.ConnectivityManager
 import com.acba.acbadigital.MainActivity
 import com.acba.acbadigital.base.AcbaApplication
+import com.acba.acbadigital.response.BaseResponseModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 suspend fun <T> acbaResponse(
     resultCallBack: ApiResultCallBack<T?>,
     showLoader: Boolean,
-    function: suspend () -> Response<T>
+    function: suspend () -> Response<BaseResponseModel<T>>
 ) {
     if (!isNetworkConnected(AcbaApplication.instance)) {
         resultCallBack.onError("no internet")
@@ -25,19 +24,16 @@ suspend fun <T> acbaResponse(
         }
         val response = function.invoke()
         val body = response.body()
-
-        GlobalScope.launch(Dispatchers.Main) {
             if (response.isSuccessful) {
-                resultCallBack.onSuccess(body)
+                resultCallBack.onSuccess(body?.result)
             } else {
-//                val error = Gson().fromJson(response.errorBody()?.charStream(), BaseResponseModel::class.java)
                 resultCallBack.onError("")
             }
 
             if (showLoader) {
                 MainActivity.loaderLiveData.postValue(false)
+
             }
-        }
     }
 }
 

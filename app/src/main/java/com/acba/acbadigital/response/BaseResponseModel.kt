@@ -2,7 +2,7 @@ package com.acba.acbadigital.response
 
 import com.google.gson.annotations.SerializedName
 
-open class BaseResponseModel<T>(
+data class BaseResponseModel<T>(
     @SerializedName("Description")
     val description: String? = null,
     @SerializedName("ResultCode")
