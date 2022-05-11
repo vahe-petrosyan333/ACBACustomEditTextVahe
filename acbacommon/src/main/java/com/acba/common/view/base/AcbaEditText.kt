@@ -12,16 +12,21 @@ import com.google.android.material.textfield.TextInputLayout
 
 class AcbaEditText : TextInputEditText, ValidatorListener {
 
-    val EMAIL_ERROR by lazy { "Incorrect email" }
-    val PASSWORD_ERROR by lazy { "Incorrect password" }
+    val EMAIL_DEFAULT_ERROR by lazy { "Incorrect email" }
+    val PASSWORD_DEFAULT_ERROR by lazy { "Incorrect password" }
 
     lateinit var validator: Validator
 
     private var layoutId: Int = 0
     private var textInputLayout: TextInputLayout? = null
     private var errorMessage: String? = ""
+    private var mEmptyErrorMessage: String? = ""
+    private var mMinLengthErrorMessage: String? = ""
+    private var mEmailErrorMessage: String? = ""
+    private var mPasswordErrorMessage: String? = ""
     private var regex: String? = ""
     private var validatorType: Int = 0
+    private var minLength: Int = 0
 
 
     constructor(context: Context) : super(context) {
@@ -48,11 +53,19 @@ class AcbaEditText : TextInputEditText, ValidatorListener {
             errorMessage = typedArray.getString(R.styleable.ACBAEditText_errorMessage)
             regex = typedArray.getString(R.styleable.ACBAEditText_regex)
             validatorType = typedArray.getInt(R.styleable.ACBAEditText_validator, 0)
+            minLength = typedArray.getInt(R.styleable.ACBAEditText_minLength, 0)
         } finally {
             typedArray.recycle()
         }
 
-
+        try {
+            mEmptyErrorMessage = context.getString(context.resources.getIdentifier("empty_message", "string", context.packageName))
+            mEmailErrorMessage = context.getString(context.resources.getIdentifier("email_validation_error", "string", context.packageName))
+            mPasswordErrorMessage = context.getString(context.resources.getIdentifier("password_validation_error", "string", context.packageName))
+            mMinLengthErrorMessage = String.format(context.getString(context.resources.getIdentifier("min_length_message", "string", context.packageName)), minLength)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun onAttachedToWindow() {
@@ -61,16 +74,23 @@ class AcbaEditText : TextInputEditText, ValidatorListener {
     }
 
     override fun validate() {
-
+        if (text.isNullOrEmpty()) {
+            showErrorWhenIsNotValid(mEmptyErrorMessage ?: "")
+            return
+        }
+        if (!validator.checkMinLength(text.toString(), minLength)) {
+            showErrorWhenIsNotValid(mMinLengthErrorMessage ?: "")
+            return
+        }
         when (validatorType) {
             1 -> {
                 if (!validator.isValidEmail(text.toString())) {
-                    showErrorWhenIsNotValid(errorMessage ?: EMAIL_ERROR)
+                    showErrorWhenIsNotValid(mEmailErrorMessage ?: EMAIL_DEFAULT_ERROR)
                 } else textInputLayout?.error = null
             }
             2 -> {
                 if (!validator.isValidPassword(text.toString())) {
-                    showErrorWhenIsNotValid(errorMessage ?: PASSWORD_ERROR)
+                    showErrorWhenIsNotValid(mPasswordErrorMessage ?: PASSWORD_DEFAULT_ERROR)
                 } else textInputLayout?.error = null
 
             }
