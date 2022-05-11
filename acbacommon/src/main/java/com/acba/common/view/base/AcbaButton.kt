@@ -28,10 +28,10 @@ class AcbaButton : MaterialButton {
     }
 
     private fun init(context: Context, attributeSet: AttributeSet? = null) {
-        val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.ACBAButton)
+        val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.AcbaButton)
         try {
             isPreventDoubleClick =
-                typedArray.getBoolean(R.styleable.ACBAButton_isPreventDoubleClick, false)
+                    typedArray.getBoolean(R.styleable.AcbaButton_isPreventDoubleClick, false)
         } finally {
             typedArray.recycle()
         }

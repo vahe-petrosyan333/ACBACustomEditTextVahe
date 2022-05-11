@@ -25,10 +25,10 @@ class AcbaImageView : androidx.appcompat.widget.AppCompatImageView {
     }
 
     private fun init(context: Context, attributeSet: AttributeSet? = null) {
-        val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.ACBAImageView)
+        val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.AcbaImageView)
         try {
             isPreventDoubleClick =
-                    typedArray.getBoolean(R.styleable.ACBAButton_isPreventDoubleClick, false)
+                    typedArray.getBoolean(R.styleable.AcbaImageView_isPreventDoubleClick, false)
         } finally {
             typedArray.recycle()
         }

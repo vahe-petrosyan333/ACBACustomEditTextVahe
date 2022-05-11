@@ -25,10 +25,10 @@ class AcbaTextView : MaterialTextView {
     }
 
     private fun init(context: Context, attributeSet: AttributeSet? = null) {
-        val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.ACBATextView)
+        val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.AcbaTextView)
         try {
             isPreventDoubleClick =
-                    typedArray.getBoolean(R.styleable.ACBAButton_isPreventDoubleClick, false)
+                    typedArray.getBoolean(R.styleable.AcbaButton_isPreventDoubleClick, false)
         } finally {
             typedArray.recycle()
         }

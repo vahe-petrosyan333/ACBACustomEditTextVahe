@@ -15,19 +15,19 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="ACBAETextInput" />
+    <declare-styleable name="AcbaTextInputLayout" />
 
-    <declare-styleable name="ACBATextView">
+    <declare-styleable name="AcbaTextView">
         <attr name="isPreventDoubleClick" />
     </declare-styleable>
 
-    <declare-styleable name="ACBAImageView">
+    <declare-styleable name="AcbaImageView">
         <attr name="isPreventDoubleClick" />
     </declare-styleable>
 
-    <declare-styleable name="ACBAToolBar" />
+    <declare-styleable name="AcbaToolBar" />
 
-    <declare-styleable name="ACBAButton">
+    <declare-styleable name="AcbaButton">
         <attr name="isPreventDoubleClick" />
     </declare-styleable>
 </resources>

@@ -20,7 +20,8 @@ class AcbaTextInputLayout : TextInputLayout {
     private fun init(context: Context, attributeSet: AttributeSet) {
         val typedArray = context.obtainStyledAttributes(
             attributeSet,
-            R.styleable.ACBAETextInput
+            R.styleable.AcbaTextInputLayout
         )
+        typedArray.recycle()
     }
 }

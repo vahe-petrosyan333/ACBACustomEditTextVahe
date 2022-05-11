@@ -19,7 +19,8 @@ class AcbaToolBar : MaterialToolbar {
     }
 
     private fun init(context: Context, attributeSet: AttributeSet? = null) {
-        val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.ACBAToolBar)
+        val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.AcbaToolBar)
+        typedArray.recycle()
     }
 
 }

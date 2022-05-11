@@ -22,7 +22,7 @@
             android:inputType="text"
             app:layoutId="@+id/email_input_layout"
             app:minLength="5"
-            app:regex="@string/reg"
+            app:regex="@string/email_regex"
             app:validator="email" />
     </com.acba.common.view.base.AcbaTextInputLayout>
 
