@@ -2,7 +2,7 @@
 <resources>
     <attr name="isPreventDoubleClick" format="boolean" />
 
-    <declare-styleable name="ACBAEditText">
+    <declare-styleable name="AcbaEditText">
         <attr name="errorMessage" format="string" />
         <attr name="layoutId" format="reference" />
         <attr name="minLength" format="integer" />

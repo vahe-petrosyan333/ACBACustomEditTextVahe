@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import com.acba.acbadigital.databinding.ActivityMainBinding
-import com.acba.common.view.validatoredittext.ValidatorListener
+import com.acba.common.view.validatoredittext.Validable
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
             for (view in root.children) {
                 isValid(view)
             }
-        } else if (root is ValidatorListener) {
+        } else if (root is Validable) {
             root.validate()
         }
 

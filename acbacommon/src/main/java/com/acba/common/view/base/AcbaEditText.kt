@@ -5,19 +5,21 @@ import android.util.AttributeSet
 import android.view.View
 import com.acba.common.R
 import com.acba.common.view.validatoredittext.Validator
-import com.acba.common.view.validatoredittext.ValidatorListener
+import com.acba.common.view.validatoredittext.Validable
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 
-class AcbaEditText : TextInputEditText, ValidatorListener {
+class AcbaEditText : TextInputEditText, Validable {
 
     val EMAIL_DEFAULT_ERROR by lazy { "Incorrect email" }
     val PASSWORD_DEFAULT_ERROR by lazy { "Incorrect password" }
-
+    companion object {
+        const val UNDEFINED = -1
+    }
     lateinit var validator: Validator
 
-    private var layoutId: Int = 0
+    private var layoutId: Int = UNDEFINED
     private var textInputLayout: TextInputLayout? = null
     private var errorMessage: String? = ""
     private var mEmptyErrorMessage: String? = ""
@@ -25,8 +27,8 @@ class AcbaEditText : TextInputEditText, ValidatorListener {
     private var mEmailErrorMessage: String? = ""
     private var mPasswordErrorMessage: String? = ""
     private var regex: String? = ""
-    private var validatorType: Int = 0
-    private var minLength: Int = 0
+    private var validatorType: Int = UNDEFINED
+    private var minLength: Int = UNDEFINED
 
 
     constructor(context: Context) : super(context) {
@@ -47,13 +49,13 @@ class AcbaEditText : TextInputEditText, ValidatorListener {
 
     private fun init(context: Context, attributeSet: AttributeSet? = null) {
         validator = Validator()
-        val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.ACBAEditText)
+        val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.AcbaEditText)
         try {
-            layoutId = typedArray.getResourceId(R.styleable.ACBAEditText_layoutId, 0)
-            errorMessage = typedArray.getString(R.styleable.ACBAEditText_errorMessage)
-            regex = typedArray.getString(R.styleable.ACBAEditText_regex)
-            validatorType = typedArray.getInt(R.styleable.ACBAEditText_validator, 0)
-            minLength = typedArray.getInt(R.styleable.ACBAEditText_minLength, 0)
+            layoutId = typedArray.getResourceId(R.styleable.AcbaEditText_layoutId, 0)
+            errorMessage = typedArray.getString(R.styleable.AcbaEditText_errorMessage)
+            regex = typedArray.getString(R.styleable.AcbaEditText_regex)
+            validatorType = typedArray.getInt(R.styleable.AcbaEditText_validator, 0)
+            minLength = typedArray.getInt(R.styleable.AcbaEditText_minLength, 0)
         } finally {
             typedArray.recycle()
         }
@@ -101,6 +103,14 @@ class AcbaEditText : TextInputEditText, ValidatorListener {
             }
 
         }
+    }
+
+    override fun showDefaultState() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showErrorState(messageRes: Int) {
+        TODO("Not yet implemented")
     }
 
     fun showErrorWhenIsNotValid(errorMessage: String) {
