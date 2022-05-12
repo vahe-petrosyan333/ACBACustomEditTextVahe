@@ -1,4 +1,4 @@
-package com.acba.common.view.base
+package com.acba.common.view.validatoredittext
 
 import android.content.Context
 import android.util.AttributeSet

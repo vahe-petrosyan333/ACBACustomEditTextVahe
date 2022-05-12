@@ -4,4 +4,6 @@
     <item name="validate_email" type="integer">1</item>
     <item name="validate_password" type="integer">2</item>
     <item name="validate_regex" type="integer">3</item>
+    <item name="validate_min_length" type="integer">4</item>
+    <item name="validate_latin_character" type="integer">5</item>
 </resources>

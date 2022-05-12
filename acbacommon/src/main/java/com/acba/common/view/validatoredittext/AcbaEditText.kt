@@ -1,14 +1,10 @@
-package com.acba.common.view.base
+package com.acba.common.view.validatoredittext
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import com.acba.common.R
-import com.acba.common.util.extentions.emailValidator
-import com.acba.common.util.extentions.passwordValidator
-import com.acba.common.util.extentions.regexValidator
-import com.acba.common.util.extentions.requiredValidator
-import com.acba.common.view.validatoredittext.Validable
+import com.acba.common.util.extentions.*
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -22,9 +18,9 @@ class AcbaEditText : TextInputEditText, Validable {
     private var isRequired: Boolean = false
     private var layoutId: Int = UNDEFINED
     private var textInputLayout: TextInputLayout? = null
-    private var errorText: String? = ""
-    private var mMinLengthErrorMessage: String? = ""
-    private var regex: String? = ""
+    private var errorText: String? = null
+    private var mMinLengthErrorMessage: String? = null
+    private var regex: String? = null
     private var validationTag: Int = UNDEFINED
     private var minLength: Int = UNDEFINED
 
@@ -49,7 +45,7 @@ class AcbaEditText : TextInputEditText, Validable {
         val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.AcbaEditText)
         try {
             layoutId = typedArray.getResourceId(R.styleable.AcbaEditText_layoutId, 0)
-            errorText = typedArray.getString(R.styleable.AcbaEditText_errorMessage)
+            errorText = typedArray.getString(R.styleable.AcbaEditText_errorText)
             regex = typedArray.getString(R.styleable.AcbaEditText_regex)
             validationTag = typedArray.getInt(R.styleable.AcbaEditText_validator, 0)
             minLength = typedArray.getInt(R.styleable.AcbaEditText_minLength, 0)
@@ -84,31 +80,39 @@ class AcbaEditText : TextInputEditText, Validable {
 
     private fun identifyValidationPatternAndValidate(validationTag: Int, target: String): Boolean {
         return when (validationTag) {
-            R.integer.validate_email -> target.emailValidator()
-            R.integer.validate_password -> target.passwordValidator()
-            R.integer.validate_required_field -> target.requiredValidator()
-            R.integer.validate_regex -> target.regexValidator(regex?.toRegex())
+            resources.getInteger(R.integer.validate_email) -> target.emailValidator()
+            resources.getInteger(R.integer.validate_password) -> target.passwordValidator()
+            resources.getInteger(R.integer.validate_required_field) -> target.requiredValidator()
+            resources.getInteger(R.integer.validate_regex) -> target.regexValidator(regex?.toRegex())
+            resources.getInteger(R.integer.validate_min_length) -> target.minLengthValidator(minLength)
+            resources.getInteger(R.integer.validate_latin_character) -> target.latinCharacterValidator()
             else -> false
         }
     }
 
     private fun getValidationText(validationTag: Int): String? {
         return when (validationTag) {
-            R.integer.validate_email ->
+            resources.getInteger(R.integer.validate_email) ->
                 context.getString(context.resources.getIdentifier("email_validation_error", "string", context.packageName))
-            R.integer.validate_password ->
+            resources.getInteger(R.integer.validate_password) ->
                 context.getString(context.resources.getIdentifier("password_validation_error", "string", context.packageName))
-            R.integer.validate_required_field ->
+            resources.getInteger(R.integer.validate_required_field) ->
                 context.getString(context.resources.getIdentifier("empty_message", "string", context.packageName))
+            resources.getInteger(R.integer.validate_min_length) ->
+                context.getString(context.resources.getIdentifier("min_length_message", "string", context.packageName))
+            resources.getInteger(R.integer.validate_latin_character) ->
+                context.getString(context.resources.getIdentifier("latin_character_error", "string", context.packageName))
             else -> ""
         }
     }
 
     override fun showDefaultState() {
-        TODO("Not yet implemented")
+        textInputLayout?.error = null
+        textInputLayout?.isErrorEnabled = false
     }
 
     override fun showErrorState(errorText: String) {
+        textInputLayout?.isErrorEnabled = true
         textInputLayout?.error = errorText
     }
 }

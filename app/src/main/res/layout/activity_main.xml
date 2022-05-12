@@ -7,14 +7,14 @@
     tools:context=".MainActivity">
 
 
-    <com.acba.common.view.base.AcbaTextInputLayout
+    <com.acba.common.view.validatoredittext.AcbaTextInputLayout
         android:id="@+id/email_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.acba.common.view.base.AcbaEditText
+        <com.acba.common.view.validatoredittext.AcbaEditText
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,27 +22,26 @@
             android:inputType="text"
             app:layoutId="@+id/email_input_layout"
             app:minLength="5"
-            app:regex="@string/email_regex"
             app:validator="email" />
-    </com.acba.common.view.base.AcbaTextInputLayout>
+    </com.acba.common.view.validatoredittext.AcbaTextInputLayout>
 
-    <com.acba.common.view.base.AcbaTextInputLayout
+    <com.acba.common.view.validatoredittext.AcbaTextInputLayout
         android:id="@+id/password_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/email_input_layout">
 
-        <com.acba.common.view.base.AcbaEditText
+        <com.acba.common.view.validatoredittext.AcbaEditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeOptions="actionDone"
             android:inputType="text"
-            app:errorMessage="wrong password"
+            app:errorText="wrong password"
             app:layoutId="@+id/password_input_layout"
             app:validator="password" />
-    </com.acba.common.view.base.AcbaTextInputLayout>
+    </com.acba.common.view.validatoredittext.AcbaTextInputLayout>
 
 
     <com.acba.common.view.base.AcbaButton

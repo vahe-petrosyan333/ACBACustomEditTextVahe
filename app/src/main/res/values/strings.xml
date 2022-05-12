@@ -4,5 +4,6 @@
     <string name="empty_message" tools:ignore="ExtraTranslation">empty text</string>
     <string name="min_length_message" tools:ignore="ExtraTranslation">text must be %d length</string>
     <string name="email_validation_error" tools:ignore="ExtraTranslation">Incorrect email</string>
-    <string name="password_validation_error" tools:ignore="ExtraTranslation">Incorrect email</string>
+    <string name="password_validation_error" tools:ignore="ExtraTranslation">Incorrect password</string>
+    <string name="latin_character_error" tools:ignore="ExtraTranslation">text must be in latin only</string>
 </resources>
