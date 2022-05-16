@@ -21,5 +21,5 @@ private fun isValidPassword(password: String?): Boolean {
 }
 
 private fun validTextMinLength(text: String, validLength: Int): Boolean {
-    return text.length <= validLength
+    return text.length >= validLength
 }

@@ -38,9 +38,9 @@
             android:layout_height="wrap_content"
             android:imeOptions="actionDone"
             android:inputType="text"
-            app:errorText="wrong password"
+            app:minLength="5"
             app:layoutId="@+id/password_input_layout"
-            app:validator="password" />
+            app:validator="minLength" />
     </com.acba.common.view.validatoredittext.AcbaTextInputLayout>
 
 

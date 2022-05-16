@@ -1,16 +1,13 @@
 package com.acba.common.view.base
 
 import android.content.Context
-import android.os.SystemClock
 import android.util.AttributeSet
-import android.view.View
 import com.acba.common.R
+import com.acba.common.util.listeners.CustomClickListener
 import com.google.android.material.textview.MaterialTextView
 
 class AcbaTextView : MaterialTextView {
-    private var lastClickTime: Long = 0
     private var isPreventDoubleClick: Boolean = true
-    private var realClickListener: OnClickListener? = null
 
     constructor(context: Context) : super(context) {
         init(context)
@@ -35,23 +32,7 @@ class AcbaTextView : MaterialTextView {
     }
 
     override fun setOnClickListener(listener: OnClickListener?) {
-        if (isPreventDoubleClick) {
-            realClickListener = listener
-            super.setOnClickListener(object : CustomClickListener() {})
-        } else {
-            super.setOnClickListener(listener)
-        }
-
-
-    }
-
-    abstract inner class CustomClickListener : OnClickListener {
-        override fun onClick(v: View?) {
-            if (SystemClock.elapsedRealtime() - lastClickTime < 1000) {
-                return
-            }
-            lastClickTime = SystemClock.elapsedRealtime()
-            realClickListener?.onClick(v)
-        }
+        if (isPreventDoubleClick) super.setOnClickListener(CustomClickListener(listener))
+        else super.setOnClickListener(listener)
     }
 }

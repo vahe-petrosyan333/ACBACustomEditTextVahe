@@ -34,9 +34,9 @@ class AcbaEditText : TextInputEditText, Validable {
     }
 
     constructor(context: Context, attributeSet: AttributeSet, defStyledAttr: Int) : super(
-            context,
-            attributeSet,
-            defStyledAttr
+        context,
+        attributeSet,
+        defStyledAttr
     ) {
         init(context, attributeSet)
     }
@@ -55,9 +55,23 @@ class AcbaEditText : TextInputEditText, Validable {
         }
 
         try {
-            mMinLengthErrorMessage = String.format(context.getString(context.resources.getIdentifier("min_length_message", "string", context.packageName)), minLength)
+            mMinLengthErrorMessage = String.format(
+                context.getString(
+                    context.resources.getIdentifier("min_length_message", "string", context.packageName)
+                ), minLength
+            )
         } catch (e: Exception) {
             e.printStackTrace()
+        }
+        onFocusChangeListener = null
+    }
+
+    override fun setOnFocusChangeListener(l: OnFocusChangeListener?) {
+        super.setOnFocusChangeListener { view, onFocus ->
+            if (!onFocus) {
+                validate()
+            }
+            l?.onFocusChange(view, onFocus)
         }
     }
 
@@ -70,7 +84,7 @@ class AcbaEditText : TextInputEditText, Validable {
         val target = text.toString()
         if (validationTag != UNDEFINED && !identifyValidationPatternAndValidate(validationTag, target)) {
             if (isRequired || target.isNotEmpty()) {
-                (errorText ?: getValidationText(validationTag))?.let { showErrorState(it) }
+                showErrorState((errorText ?: getValidationText(validationTag)))
                 return false
             }
         }
@@ -90,18 +104,13 @@ class AcbaEditText : TextInputEditText, Validable {
         }
     }
 
-    private fun getValidationText(validationTag: Int): String? {
+    private fun getValidationText(validationTag: Int): String {
         return when (validationTag) {
-            resources.getInteger(R.integer.validate_email) ->
-                context.getString(context.resources.getIdentifier("email_validation_error", "string", context.packageName))
-            resources.getInteger(R.integer.validate_password) ->
-                context.getString(context.resources.getIdentifier("password_validation_error", "string", context.packageName))
-            resources.getInteger(R.integer.validate_required_field) ->
-                context.getString(context.resources.getIdentifier("empty_message", "string", context.packageName))
-            resources.getInteger(R.integer.validate_min_length) ->
-                context.getString(context.resources.getIdentifier("min_length_message", "string", context.packageName))
-            resources.getInteger(R.integer.validate_latin_character) ->
-                context.getString(context.resources.getIdentifier("latin_character_error", "string", context.packageName))
+            resources.getInteger(R.integer.validate_email) -> context.getString(R.string.email_validation_error)
+            resources.getInteger(R.integer.validate_password) -> context.getString(R.string.password_validation_error)
+            resources.getInteger(R.integer.validate_required_field) -> context.getString(R.string.empty_error_text)
+            resources.getInteger(R.integer.validate_min_length) -> String.format(context.getString(R.string.min_length_error_text), minLength)
+            resources.getInteger(R.integer.validate_latin_character) -> context.getString(R.string.latin_character_error)
             else -> ""
         }
     }
