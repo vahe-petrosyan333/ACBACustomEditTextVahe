@@ -21,8 +21,8 @@
             android:imeOptions="actionDone"
             android:inputType="text"
             app:layoutId="@+id/email_input_layout"
-            app:minLength="5"
-            app:validator="email" />
+            app:validateWithRegex="@string/email_regex"
+            app:regexErrorText="@string/email_validation_error" />
     </com.acba.common.view.validatoredittext.AcbaTextInputLayout>
 
     <com.acba.common.view.validatoredittext.AcbaTextInputLayout
@@ -38,9 +38,9 @@
             android:layout_height="wrap_content"
             android:imeOptions="actionDone"
             android:inputType="text"
-            app:minLength="5"
             app:layoutId="@+id/password_input_layout"
-            app:validator="minLength" />
+            app:minLength="5"
+            app:validatorType="minLength" />
     </com.acba.common.view.validatoredittext.AcbaTextInputLayout>
 
 

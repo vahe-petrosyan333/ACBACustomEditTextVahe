@@ -3,17 +3,16 @@
     <attr name="isPreventDoubleClick" format="boolean" />
 
     <declare-styleable name="AcbaEditText">
-        <attr name="errorText" format="string" />
+        <attr name="regexErrorText" format="string" />
         <attr name="layoutId" format="reference" />
         <attr name="isRequired" format="boolean" />
         <attr name="minLength" format="integer" />
-        <attr name="regex" format="string" />
-        <attr name="validator" format="enum">
+        <attr name="validateWithRegex" format="string" />
+        <attr name="validatorType" format="enum">
             <enum name="none" value="0" />
             <enum name="email" value="1" />
             <enum name="password" value="2" />
-            <enum name="regex" value="3" />
-            <enum name="minLength" value="4" />
+            <enum name="minLength" value="3" />
         </attr>
     </declare-styleable>
 

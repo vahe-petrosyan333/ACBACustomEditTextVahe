@@ -18,9 +18,8 @@ class AcbaEditText : TextInputEditText, Validable {
     private var isRequired: Boolean = false
     private var layoutId: Int = UNDEFINED
     private var textInputLayout: TextInputLayout? = null
-    private var errorText: String? = null
-    private var mMinLengthErrorMessage: String? = null
-    private var regex: String? = null
+    private var errorTextFromRegex: String? = null
+    private var validateWithRegex: String? = null
     private var validationTag: Int = UNDEFINED
     private var minLength: Int = UNDEFINED
 
@@ -35,8 +34,7 @@ class AcbaEditText : TextInputEditText, Validable {
 
     constructor(context: Context, attributeSet: AttributeSet, defStyledAttr: Int) : super(
         context,
-        attributeSet,
-        defStyledAttr
+        attributeSet, defStyledAttr
     ) {
         init(context, attributeSet)
     }
@@ -45,23 +43,13 @@ class AcbaEditText : TextInputEditText, Validable {
         val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.AcbaEditText)
         try {
             layoutId = typedArray.getResourceId(R.styleable.AcbaEditText_layoutId, 0)
-            errorText = typedArray.getString(R.styleable.AcbaEditText_errorText)
-            regex = typedArray.getString(R.styleable.AcbaEditText_regex)
-            validationTag = typedArray.getInt(R.styleable.AcbaEditText_validator, 0)
+            errorTextFromRegex = typedArray.getString(R.styleable.AcbaEditText_regexErrorText)
+            validateWithRegex = typedArray.getString(R.styleable.AcbaEditText_validateWithRegex)
+            validationTag = typedArray.getInt(R.styleable.AcbaEditText_validatorType, -1)
             minLength = typedArray.getInt(R.styleable.AcbaEditText_minLength, 0)
             isRequired = typedArray.getBoolean(R.styleable.AcbaEditText_isRequired, false)
         } finally {
             typedArray.recycle()
-        }
-
-        try {
-            mMinLengthErrorMessage = String.format(
-                context.getString(
-                    context.resources.getIdentifier("min_length_message", "string", context.packageName)
-                ), minLength
-            )
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
         onFocusChangeListener = null
     }
@@ -84,7 +72,13 @@ class AcbaEditText : TextInputEditText, Validable {
         val target = text.toString()
         if (validationTag != UNDEFINED && !identifyValidationPatternAndValidate(validationTag, target)) {
             if (isRequired || target.isNotEmpty()) {
-                showErrorState((errorText ?: getValidationText(validationTag)))
+                showErrorState(getValidationText(validationTag))
+                return false
+            }
+        }
+        if (!validateWithRegex.isNullOrEmpty()) {
+            if (!target.regexValidator(validateWithRegex?.toRegex())) {
+                showErrorState(errorTextFromRegex ?: "")
                 return false
             }
         }
@@ -97,7 +91,6 @@ class AcbaEditText : TextInputEditText, Validable {
             resources.getInteger(R.integer.validate_email) -> target.emailValidator()
             resources.getInteger(R.integer.validate_password) -> target.passwordValidator()
             resources.getInteger(R.integer.validate_required_field) -> target.requiredValidator()
-            resources.getInteger(R.integer.validate_regex) -> target.regexValidator(regex?.toRegex())
             resources.getInteger(R.integer.validate_min_length) -> target.minLengthValidator(minLength)
             resources.getInteger(R.integer.validate_latin_character) -> target.latinCharacterValidator()
             else -> false
