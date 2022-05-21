@@ -55,7 +55,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <include
-        android:id="@+id/loading_layout"
-        layout="@layout/loading_layout" />
+<!--    <include-->
+<!--        android:id="@+id/loading_layout"-->
+<!--        layout="@layout/loading_layout" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
