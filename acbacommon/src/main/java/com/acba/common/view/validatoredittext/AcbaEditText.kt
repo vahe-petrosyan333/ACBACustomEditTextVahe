@@ -76,12 +76,12 @@ class AcbaEditText : TextInputEditText, Validable {
                 return false
             }
         }
-        if (!validateWithRegex.isNullOrEmpty()) {
-            if (!target.regexValidator(validateWithRegex?.toRegex())) {
-                showErrorState(errorTextFromRegex ?: "")
-                return false
-            }
-        }
+//        if (!validateWithRegex.isNullOrEmpty()) {
+//            if (!target.regexValidator(validateWithRegex?.toRegex())) {
+//                showErrorState(errorTextFromRegex ?: "")
+//                return false
+//            }
+//        }
         showDefaultState()
         return true
     }
