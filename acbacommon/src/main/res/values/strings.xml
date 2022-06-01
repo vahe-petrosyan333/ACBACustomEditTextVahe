@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="email_regex" />
-    <string name="empty_error_text" />
-    <string name="min_length_error_text" />
-    <string name="email_validation_error" />
-    <string name="password_validation_error" />
-    <string name="latin_character_error" />
-</resources>
