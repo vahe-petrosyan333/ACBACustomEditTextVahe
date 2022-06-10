@@ -1,0 +1,8 @@
+<resources>
+  <style name="Theme.ACBACustomEditTextVahe.NoActionBar" >
+  <item name="windowActionBar">false</item>
+  <item name="windowNoTitle">true</item>
+</style>
+  <style name="Theme.ACBACustomEditTextVahe.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+  <style name="Theme.ACBACustomEditTextVahe.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>

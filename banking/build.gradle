@@ -1,14 +1,15 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
-    compileSdk 31
+    compileSdk 32
 
     defaultConfig {
         minSdk 25
-        targetSdk 31
+        targetSdk 32
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -27,18 +28,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
 }
 
 dependencies {
-    api uiDependency.values()
-    api junitTestImplementation.values()
-    api extJunitTest.values()
-    api espressoCore.values()
-    api uiDependency.values()
-    api networkDependency.values()
-    api diDependency.values()
-    api navigationDependencies.values()
-    api liveDataVMDependencies.values()
-    api coroutineDependencies.values()
-    api koinDependencies.values()
+
+    implementation project(':common')
 }

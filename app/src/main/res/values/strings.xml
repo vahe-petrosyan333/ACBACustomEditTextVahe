@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ACBA digital</string>
+    <string name="email_validation_error" >invalid email</string>
+
 </resources>

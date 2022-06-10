@@ -9,10 +9,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".base.AcbaApplication"
+        android:name="com.example.banking.AcbaApplication"
         android:theme="@style/Theme.ACBACustomEditTextVahe">
         <activity
-            android:name="com.acba.acbadigital.MainActivity"
+            android:name="com.example.banking.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

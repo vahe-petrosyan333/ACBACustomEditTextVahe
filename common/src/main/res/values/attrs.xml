@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="isPreventDoubleClick" format="boolean" />
+
+    <declare-styleable name="CustomEditText">
+        <attr name="regexErrorText" format="string" />
+        <attr name="layoutId" format="reference" />
+        <attr name="isRequired" format="boolean" />
+        <attr name="minLength" format="integer" />
+        <attr name="validateWithRegex" format="string" />
+        <attr name="validatorType" format="enum">
+            <enum name="none" value="0" />
+            <enum name="email" value="1" />
+            <enum name="password" value="2" />
+            <enum name="minLength" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="CustomTextInputLayout" />
+
+    <declare-styleable name="CustomTextView">
+        <attr name="isPreventDoubleClick" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomImageView">
+        <attr name="isPreventDoubleClick" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomToolBar" />
+
+    <declare-styleable name="CustomButton">
+        <attr name="isPreventDoubleClick" />
+    </declare-styleable>
+</resources>
