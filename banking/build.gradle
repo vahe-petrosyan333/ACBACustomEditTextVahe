@@ -2,14 +2,15 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+
 }
 
 android {
-    compileSdk 32
+    compileSdk appCompilesdk
 
     defaultConfig {
-        minSdk 25
-        targetSdk 32
+        minSdk appMinSdk
+        targetSdk appTargetSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -37,4 +38,5 @@ android {
 dependencies {
 
     implementation project(':common')
+
 }
