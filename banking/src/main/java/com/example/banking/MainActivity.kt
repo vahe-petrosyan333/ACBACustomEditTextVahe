@@ -1,5 +1,6 @@
 package com.example.banking
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,7 +11,9 @@ import androidx.core.view.children
 import androidx.lifecycle.MutableLiveData
 import androidx.work.*
 import com.example.banking.databinding.ActivityMainBinding
+import com.example.banking.registration.RegistrationActivity
 import com.example.common.view.validatoredittext.Validable
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,6 +30,10 @@ class MainActivity : AppCompatActivity() {
                 isValid(root)
 //                Log.d("DOUBLE_CLICK", "click")
 //                setOneTimeWorkRequest()
+            }
+            buttonRegister.setOnClickListener {
+                val intent = Intent(applicationContext, RegistrationActivity::class.java)
+                startActivity(intent)
             }
         }
 
