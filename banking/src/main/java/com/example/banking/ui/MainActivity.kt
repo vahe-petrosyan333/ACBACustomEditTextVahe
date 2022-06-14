@@ -1,4 +1,4 @@
-package com.example.banking
+package com.example.banking.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,9 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import androidx.lifecycle.MutableLiveData
 import androidx.work.*
+import com.example.banking.MyWorker
 import com.example.banking.databinding.ActivityMainBinding
 import com.example.banking.registration.RegistrationActivity
+import com.example.banking.ui.viewmodel.MainViewModel
 import com.example.common.view.validatoredittext.Validable
+import org.koin.android.ext.android.get
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     val TAG = "workmng"
 
     private var mLoading: View? = null
-
+    private val viewModel = MainViewModel(mainSharedRepository = get())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,5 +81,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 Log.i(TAG, it.state.name)
             }
+    }
+    fun getRates(){
+
     }
 }

@@ -12,7 +12,7 @@
         android:name="com.example.banking.AcbaApplication"
         android:theme="@style/Theme.ACBACustomEditTextVahe">
         <activity
-            android:name="com.example.banking.MainActivity"
+            android:name="com.example.banking.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.banking.registration.RegistrationActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
