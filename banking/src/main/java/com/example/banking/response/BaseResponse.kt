@@ -1,4 +1,4 @@
-package com.example.common.response
+package com.example.banking.response
 
 import com.google.gson.annotations.SerializedName
 

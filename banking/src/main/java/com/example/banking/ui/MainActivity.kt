@@ -1,5 +1,6 @@
-package com.example.banking
+package com.example.banking.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,15 +10,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import androidx.lifecycle.MutableLiveData
 import androidx.work.*
+import com.example.banking.MyWorker
 import com.example.banking.databinding.ActivityMainBinding
+import com.example.banking.registration.RegistrationActivity
+import com.example.banking.ui.viewmodel.MainViewModel
 import com.example.common.view.validatoredittext.Validable
+import org.koin.android.ext.android.get
+
 
 class MainActivity : AppCompatActivity() {
 
     val TAG = "workmng"
 
     private var mLoading: View? = null
-
+    private val viewModel = MainViewModel(mainSharedRepository = get())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +33,10 @@ class MainActivity : AppCompatActivity() {
                 isValid(root)
 //                Log.d("DOUBLE_CLICK", "click")
 //                setOneTimeWorkRequest()
+            }
+            buttonRegister.setOnClickListener {
+                val intent = Intent(applicationContext, RegistrationActivity::class.java)
+                startActivity(intent)
             }
         }
 
@@ -71,5 +81,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 Log.i(TAG, it.state.name)
             }
+    }
+    fun getRates(){
+
     }
 }

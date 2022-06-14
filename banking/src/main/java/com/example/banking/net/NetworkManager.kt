@@ -1,9 +1,9 @@
-package com.example.common.net
+package com.example.banking.net
 
 import android.content.Context
 import android.net.ConnectivityManager
 import com.example.common.base.BaseApplication
-import com.example.common.response.BaseResponseModel
+import com.example.banking.response.BaseResponseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
@@ -19,7 +19,7 @@ suspend fun <T> acbaResponse(
     }
     withContext(Dispatchers.IO) {
         if (showLoader) {
-          // TODO
+            // TODO
         }
         val response = function.invoke()
         val body = response.body()
